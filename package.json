@@ -1,0 +1,18 @@
+{
+  "name": "qtsolv-web-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.5",
+    "allure-playwright": "^3.0.7"
+  },
+  "dependencies": {
+    "playwright": "^1.49.1"
+  },
+  "scripts": {}
+}
