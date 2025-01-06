@@ -1,4 +1,4 @@
-export class HeaderPage {
+class HeaderPage {
   constructor(page) {
     this.page = page;
     this.menuSelectors = [
