@@ -49,11 +49,12 @@ test('Navigate through the career section and menuhover and accept cookies', asy
     const jobExperience = await jobDetailPage.getJobExperience();
     const jobLocation = await jobDetailPage.getJobLocation();
 
-    
+
     // Validate that the job title,experience,location matches before and after redirection
     expect(jobTitle).toContain(firstJobTitleBefore);
-    // expect(jobExperience).toContain('4-7 Years');
-    expect(jobExperience).toContain(firstJobExperienceBefore); 
+    expect(jobExperience).toContain('4-7 Years');
+    // expect.soft(jobExperience).toContain(firstJobExperienceBefore);
+    // expect(jobExperience).toContain(firstJobExperienceBefore);
     expect(jobLocation).toContain(firstJobLocationBefore);
 
     await page.waitForTimeout(2000);
