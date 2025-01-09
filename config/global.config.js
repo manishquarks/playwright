@@ -38,7 +38,7 @@ const globalConfig = {
     ],
     use: {
         browserName: process.env.BROWSER_NAME || 'chromium',
-        headless: false,
+        headless: true,
         ignoreHTTPSErrors: process.env.IGNORE_HTTPS_ERRORS === 'true',
         screenshot: process.env.SCREENSHOT || 'only-on-failure',
         video: process.env.VIDEO || 'retain-on-failure',
