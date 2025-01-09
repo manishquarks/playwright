@@ -52,8 +52,8 @@ test('Navigate through the career section and menuhover and accept cookies', asy
 
     // Validate that the job title,experience,location matches before and after redirection
     expect(jobTitle).toContain(firstJobTitleBefore);
-    expect(jobExperience).toContain('4-7 Years');
-    // expect.soft(jobExperience).toContain(firstJobExperienceBefore);
+    // expect(jobExperience).toContain('3-5 Years');
+    expect.soft(jobExperience).toBe(firstJobExperienceBefore);
     // expect(jobExperience).toContain(firstJobExperienceBefore);
     expect(jobLocation).toContain(firstJobLocationBefore);
 
