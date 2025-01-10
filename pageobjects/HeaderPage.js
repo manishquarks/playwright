@@ -1,27 +1,24 @@
 class HeaderPage {
   constructor(page) {
     this.page = page;
-    this.menuSelectors = [
-      { selector: 'li.nav-item:nth-child(1) .nav-link', megaMenu: '.megaMenu' }, // Services
-      { selector: 'li.nav-item:nth-child(2) .nav-link', megaMenu: '.megaMenu' }, // Industries
-      { selector: 'li.nav-item:nth-child(3) .nav-link', megaMenu: '.megaMenu' }, // Solutions
-      { selector: 'li.nav-item:nth-child(4) .nav-link', megaMenu: '.megaMenu' }, // About Us
-      { selector: 'li.nav-item:nth-child(5) .nav-link', megaMenu: '.megaMenu' }, // Careers
-      { selector: 'li.nav-item:nth-child(6) .nav-link', megaMenu: '.megaMenu' }, // Contact Us
-      { selector: 'li.nav-item:nth-child(7) .nav-link', megaMenu: '.megaMenu' }, // Playbook Button
-    ];
+    this.menuSelector = 'ul.navbar-nav li.nav-item';
+    this.megaMenuSelector = '.megaMenu';
   }
 
   // Function to hover over a menu item and check if its mega menu is visible
-  async hoverAndCheckMegaMenu(menu) {
-    await this.page.hover(menu.selector);
-    const isVisible = await this.isMegaMenuVisible(menu.megaMenu);
+  async hoverAndCheckMegaMenu(index) {
+    const menuItem = this.page.locator(`${this.menuSelector}:nth-child(${index}) .nav-link`);
+    await menuItem.hover();
+
+    await this.page.waitForTimeout(500);
+    const megaMenu = this.page.locator(`${this.menuSelector}:nth-child(${index}) .megaMenu`);
+    const isVisible = await megaMenu.isVisible();
+
     if (isVisible) {
-      console.log(`Mega menu is visible for ${menu.selector}`);
+      console.log(`Mega menu is visible for menu item ${index}`);
     } else {
-      console.error(`Mega menu did not appear for ${menu.selector}`);
+      console.error(`Mega menu did not appear for menu item ${index}`);
     }
-    await this.page.waitForTimeout(1000);
   }
 
   // Function to check if the mega menu is visible
@@ -30,11 +27,18 @@ class HeaderPage {
     return isVisible;
   }
 
-  // Function to loop over the menu items and check if their mega menus appear
+  // Function to loop over the menu items and check if their mega menus
   async checkAllMegaMenus() {
-    for (const menu of this.menuSelectors) {
-      await this.hoverAndCheckMegaMenu(menu);
+    const menuItemsCount = await this.page.locator(this.menuSelector).count();
+    for (let i = 1; i <= menuItemsCount; i++) {
+      const actualText = await this.getMenuItemText(i);
+      await this.hoverAndCheckMegaMenu(i);
     }
+  }
+
+  async getMenuItemText(index) {
+    const menuItem = this.page.locator(`${this.menuSelector}:nth-child(${index}) .nav-link`);
+    return await menuItem.textContent();
   }
 }
 module.exports = HeaderPage;

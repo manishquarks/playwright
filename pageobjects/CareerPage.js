@@ -31,13 +31,13 @@ class CareerPage {
       await this.loader.waitFor({ state: 'hidden' });
   }
       
-  async getFirstJobTitle() {
+  async getJobTitle() {
     return await this.jobTitle.first().innerText();
   }
-  async getFirstJobExperience(){
+  async getJobExperience(){
     return await this.jobExperience.first().textContent();
   }
-  async getFirstJobLocation(){
+  async getJobLocation(){
     return await this.jonLocation.first().textContent();
   }
       
@@ -48,3 +48,5 @@ class CareerPage {
 }
 
 module.exports = CareerPage;
+
+

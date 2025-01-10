@@ -37,25 +37,23 @@ test('Navigate through the career section and menuhover and accept cookies', asy
     await careerPage.waitForLoaderToDisappear();
 
     // Get the first job title,experience,location and validate it
-    const firstJobTitleBefore = await careerPage.getFirstJobTitle();
-    const firstJobExperienceBefore = await careerPage.getFirstJobExperience();
-    const firstJobLocationBefore = await careerPage.getFirstJobLocation();
+    const JobTitleOnCareersPage = await careerPage.getJobTitle();
+    const JobExperienceOnCareersPage = await careerPage.getJobExperience();
+    const jobLocationOnCareersPage = await careerPage.getJobLocation();
 
     // Click on the first job option
     await careerPage.clickFirstJob();
 
     // get the job title,experience, and location after redirection
-    const jobTitle = await jobDetailPage.getJobTitle();
-    const jobExperience = await jobDetailPage.getJobExperience();
-    const jobLocation = await jobDetailPage.getJobLocation();
-
+    const JobTitleInsideJobDetailsPage = await jobDetailPage.getJobTitle();
+    const JobExperienceInsideJobDetailsPage = await jobDetailPage.getJobExperience();
+    const JobLocationInsideJobDetailsPage = await jobDetailPage.getJobLocation();
+    
 
     // Validate that the job title,experience,location matches before and after redirection
-    expect(jobTitle).toContain(firstJobTitleBefore);
-    // expect(jobExperience).toContain('3-5 Years');
-    // expect.soft(jobExperience).toBe(firstJobExperienceBefore);
-    // expect(jobExperience).toContain(firstJobExperienceBefore);
-    expect(jobLocation).toContain(firstJobLocationBefore);
+    expect(JobTitleInsideJobDetailsPage).toContain(JobTitleOnCareersPage);
+    expect(JobExperienceInsideJobDetailsPage.toLowerCase()).toContain(JobExperienceOnCareersPage.toLowerCase());
+    expect(JobLocationInsideJobDetailsPage).toContain(jobLocationOnCareersPage);
 
     await page.waitForTimeout(2000);
 });
